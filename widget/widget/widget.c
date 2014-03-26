@@ -552,8 +552,8 @@ extern si_t widget_listen_custom(void* w, char* str, si_t (* response)(void *,vo
     struct widget * self = w;
     union message * msg = (union message *)malloc(sizeof(union message));
 //    strcpy(a,str);
-    msg->message_custom = malloc(sizeof(char)*10);
-    strcpy(msg->message_custom,str);
+    msg->custom.str = malloc(sizeof(char)*10);
+    strcpy(msg->custom.str,str);
     self->msg_fct[self->msg_num].msg_type = msg;
     self->msg_fct[self->msg_num].function = response;
     self->msg_num=self->msg_num+1;
@@ -565,7 +565,7 @@ struct widget* widget_trigger_single(struct widget* w, union message* m)
     int i;
     for(i=0;i<w->msg_num;i++)
     {
-        if(strcmp(w->msg_fct[i].msg_type->message_custom,m->message_custom)==0)
+        if(strcmp(w->msg_fct[i].msg_type->custom.str,m->custom.str)==0)
         {
             w->msg_fct[i].function(w, m);
         }
@@ -578,7 +578,7 @@ si_t widget_trigger(char *str)
     char* a = malloc(sizeof(char)*10);
     union message *m = (union message *)malloc(sizeof(union message));
     strcpy(a,str);
-    m->message_custom=a;
+    m->custom.str=a;
     application_widgets_for_each_decreament_public(widget_trigger_single, m);
     return 0;
 }

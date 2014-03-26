@@ -698,6 +698,14 @@ struct message_window_cancel
 
 extern void message_set_window_cancel(union message* m, si_t w);
 
+struct message_custom
+{
+    MESSAGE_BASE_DEFINITION
+    char * str;
+};
+
+extern void message_set_custom(union message* m);
+
 union message
 {
     struct message_base              base;
@@ -716,7 +724,7 @@ union message
 	struct message_window_register	 window_register;
 	struct message_window_cancel	 window_cancel;
     struct message_keyboard_leave    keybd_leave;
-    char * message_custom;
+    struct message_custom            custom;
 };
 
 

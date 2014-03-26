@@ -273,3 +273,8 @@ extern void message_set_window_cancel(union message* m, si_t w)
 {
 	message_set_window(m, w, MESSAGE_TYPE_WINDOW_CANCEL);
 }
+
+extern void message_set_custom(union message* m)
+{
+    message_set_type(m, MESSAGE_TYPE_CUSTOM);
+}
