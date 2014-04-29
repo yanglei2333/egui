@@ -12,6 +12,41 @@
 #define SERVER_PATH "/tmp/test_server_sock"
 const char* help_str = "usage:\n1. draw_line x1 y1 x2 y2\n2. register_window parent_descripter window_title\n3. window_manager_exit";
 
+/*记录每一个参数的类型及此参数在该类型参数表中的位置
+ * 第一维参数组中各个参数类型对应的数字编号
+ *0代表char[];1代表si_t……
+ *
+ * 第二维代表这项参数位于这个类型的参数的第几个
+ * 例如：type=1,position=2表示一个int型数参数，这个参数位于int型的第二个位置
+*/
+struct parameter_type_and_position
+{
+    int type;
+    int position;
+};
+
+struct parameter_list
+{
+    /*记录函数名*/
+    char name[1024];
+
+    /*记录参数个数*/
+    int num;
+
+    /*记录每一个参数的类型和位置*/
+    struct parameter_type_and_position par_type[30];
+    
+    /*参数表*/
+    char par_str[5][100];
+    si_t par_si_t[10];
+    struct egui_uds* par_egui_uds[5];
+    char* par_char_pointers[5];
+};    
+
+//struct test_client_request_to_number[30]={{"draw_line",0},{"register_window",1},{"window_manager_exit",2}};
+
+struct parameter_list test_client_parameter_list[30]={{"draw_line",4,{{1,0},{1,1},{1,2},{1,3}}},{"register_window",2,{{1,0},{0,0}}},{"window_manager_exit",0}};
+
 /**
  * 发送draw line请求
  **/
@@ -90,57 +125,73 @@ int fake_register_window(struct egui_uds* uds_ptr, si_t parent_fd, char* title)
  * 1. $0 draw_line x1 y1 x2 y2
  * 2. $0 register_window fd title
  * 3. $0 window_manager_exit
- **/
+ **//*}}}*/
 si_t command_handler(struct egui_uds* uds_ptr, addr_t arg)
 {
 	char command_buf[1024];
-	struct egui_uds* server_uds_ptr = (struct egui_uds*)arg;
-	const char draw_line_command[] = "draw_line";
-	const char register_window_command[] = "register_window";
-	const char window_manager_exit_command[] = "window_manager_exit";
+    int i, j;
+    struct egui_uds* server_uds_ptr = (struct egui_uds*)arg;
+
 	NOT_USED(uds_ptr);
 
 	EGUI_PRINT_INFO("callback command_handler() is called");
 
 	scanf("%s", command_buf);
-
-	if(0 == strncmp(command_buf, draw_line_command, sizeof(draw_line_command)))
-	{
-		si_t x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+    for(i=0; i<30; i++)
+    {
+	    if(0 == strncmp(command_buf, test_client_parameter_list[i].name, sizeof(command_buf)))
+	    {
+            for(j=0; j<test_client_parameter_list[i].num; j++)
+            {
+                if(1 == test_client_parameter_list[i].par_type[j].type)
+                {
+                    scanf("%d",(int *)&test_client_parameter_list[i].par_si_t[test_client_parameter_list[i].par_type[j].position]);
+                }
+                if(0 == test_client_parameter_list[i].par_type[j].type)
+                {
+                    scanf("%s",test_client_parameter_list[i].par_str[test_client_parameter_list[i].par_type[j].position]);
+                }
+            }
+            break;
+        }
+    }
+    if(i>=30)
+    {
+		EGUI_PRINT_ERROR("unknow command %s", command_buf);
+		EGUI_PRINT_INFO(help_str);
+    }
+    if(0 == i)
+    {
 		EGUI_PRINT_INFO("get draw_line_command");
-		scanf("%d%d%d%d", (int*)&x1, (int*)&y1, (int*)&x2, (int*)&y2);
-		if(0 != fake_draw_line(server_uds_ptr, x1, y1, x2, y2))
-		{
-			EGUI_PRINT_ERROR("failed to execute draw line command");
-		}
-	}
-	else if(0 == strncmp(command_buf, register_window_command, sizeof(register_window_command)))
-	{
-		si_t fd = 0;
-		char title_buf[1024] = {0};
+        if(0 != fake_draw_line(server_uds_ptr, test_client_parameter_list[0].par_si_t[0], test_client_parameter_list[0].par_si_t[1], test_client_parameter_list[0].par_si_t[2], test_client_parameter_list[0].par_si_t[3]))
+        {
+            EGUI_PRINT_ERROR("failed to execute draw line command");
+        }
+    }
+    else if(1 == i)
+    {
 		EGUI_PRINT_INFO("get register_window_command");
-		scanf("%d%s", (int*)&fd, title_buf);
-		if(0 != fake_register_window(server_uds_ptr, fd, title_buf))
-		{
+        si_t fd = 0;
+        if(0 != fake_register_window(server_uds_ptr, fd, test_client_parameter_list[1].par_str[0]))
+        {
 			EGUI_PRINT_ERROR("failed to execute register window command");
 		}
-	}
-	else if(0 == strncmp(command_buf, window_manager_exit_command, sizeof(window_manager_exit_command)))
-	{
+    }
+    else if(2 == i)
+    {
 		EGUI_PRINT_INFO("get window_manager_exit_command");
 		if(0 != fake_window_manager_exit(server_uds_ptr))
 		{
 			EGUI_PRINT_ERROR("failed to execute window manager exit command");
 		}
-		/** 如果用户输入退出窗口管理器的命令，那么客户端的程序也应当退出 **/
 		return SELECTER_RETURN_TYPE_END;
-	}
+    }
 	else
 	{
 		EGUI_PRINT_ERROR("unknow command %s", command_buf);
 		EGUI_PRINT_INFO(help_str);
 	}
-	return SELECTER_RETURN_TYPE_CONTINUE;
+    return SELECTER_RETURN_TYPE_CONTINUE;
 }
 
 /**
