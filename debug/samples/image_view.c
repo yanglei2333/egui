@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 		/* 默认加载图片 */
       if(file_name == NULL)
       {
-         i = image_view_init("/home/wangfei/egui/resource/icons/desktop/desktop44.bmp");
+         i = image_view_init("/home/yanglei/egui/resource/icons/desktop/desktop44.bmp");
       }
       else
       {

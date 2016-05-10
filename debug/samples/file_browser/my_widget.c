@@ -129,9 +129,9 @@ si_t get_type(char * str)
 void get_icon_dir_path(char * icon_path)
 {
    if(icon_flag)
-   strcpy(icon_path,"/home/wangfei/egui/resource/icons/file_icon/");
+   strcpy(icon_path,"/home/yanglei/egui/resource/icons/file_icon/");
    else
-   strcpy(icon_path,"/home/wangfei/egui/resource/icons/file_icon2/");
+   strcpy(icon_path,"/home/yanglei/egui/resource/icons/file_icon2/");
 }
 
 
@@ -286,7 +286,7 @@ si_t pop_window2(struct my_widget * mw)
     }
     window_set_bounds(save_window,x + 30, y + 30, 400, 340);
     window_set_color(save_window, NULL, &white);
-    i = image_view_init("/home/wangfei/egui/resource/icons/right_click/attribute_1.bmp");
+    i = image_view_init("/home/yanglei/egui/resource/icons/right_click/attribute_1.bmp");
     image_view_set_bounds(i, 10, 5, 166, 330);
 
     if(file_or_directory==0)
@@ -564,7 +564,7 @@ si_t open_file(struct my_widget * mw)//////////////////////////////////
                if((pid = fork()) == 0)
               {
                 //set_color(mw->gd, 0, 0, 0, 0);
-                execl("/home/wangfei/egui/_bulid/debug/samples/image_view","./image_view",file_name,NULL);
+                execl("/home/yanglei/egui/_bulid/debug/samples/image_view","./image_view",file_name,NULL);
                 exit(0);
               }
 
@@ -576,8 +576,8 @@ si_t open_file(struct my_widget * mw)//////////////////////////////////
               {
                 set_color(mw->gd, 0, 0, 0, 0);
                 //execv(command[0], command);
-                 // execl("/home/wangfei/egui/_build/debug/samples/editerbasic","./editerbasic",NULL);
-                  execl("/home/wangfei/egui/_bulid/debug/samples/editerbasic","./editerbasic",di_ptr->name+2,NULL);
+                 // execl("/home/yanglei/egui/_build/debug/samples/editerbasic","./editerbasic",NULL);
+                  execl("/home/yanglei/egui/_bulid/debug/samples/editerbasic","./editerbasic",di_ptr->name+2,NULL);
                   //execl(command[0],command);
                 exit(0);
               }
@@ -887,11 +887,11 @@ my_widget_default_mouse_release
             set_color(mw->gd,mw->back_color.r,mw->back_color.g, mw->back_color.b,mw->back_color.a);
            if(cut_paste_flag == 0)
            {
-		        draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_2_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+		        draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_2_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
            }
            else
            {
-               draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_1_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+               draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_1_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
            }
         }
         else
@@ -903,9 +903,9 @@ my_widget_default_mouse_release
             set_color(mw->gd,mw->back_color.r,mw->back_color.g, mw->back_color.b,mw->back_color.a);
             di_ptr = vector_at(&file_list,cur_file_index);
             if(get_type(di_ptr->name)!=6)
-            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_1_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_1_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
             else
-            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_2_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_2_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
         }
 
 
@@ -947,12 +947,12 @@ my_widget_default_mouse_single_click
                 switch((y1-right_click_y-105)/35)
                    {
                         case 0:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/3_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/3_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             save_or_rename_flag=1;
                             build_file(mw);
                             break;
                         case 1:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/3_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/3_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             save_or_rename_flag=0;
                             build_file(mw);
                             break;
@@ -983,17 +983,17 @@ my_widget_default_mouse_single_click
                 switch((y1-right_click_y)/35)
                    {
                         case 0:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/4_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/4_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             sort_flag=1;
                             refresh(mw);
                             break;
                         case 1:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/4_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/4_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             sort_flag=2;
                             refresh(mw);
                             break;
                         case 2:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/4_3.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/4_3.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             sort_flag=3;
                             refresh(mw);
                             break;
@@ -1028,7 +1028,7 @@ my_widget_default_mouse_single_click
                     switch((y1-right_click_y)/35)
                    {
                         case 0://排序方式
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_2_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_2_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             if(right_click_x< (area.width-320))
                             {
                                left_or_right=1;
@@ -1039,19 +1039,19 @@ my_widget_default_mouse_single_click
                                left_or_right=0;
                                set_area(mw->gd,x+right_click_x-160,y+right_click_y,160,105);
                             }
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/4_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/4_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             right_click_flag=4;
                             my_widget_show(mw);
                             break;
                         case 1://刷新
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_2_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_2_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             set_area(mw->gd,area.x,area.y,area.width,area.height);
                             refresh(mw);
                             break;
                         case 2://粘贴
                             break;
                         case 3://新建
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_2_4.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_2_4.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             if(right_click_x< (area.width-320))
                             {
                                left_or_right=1;
@@ -1062,12 +1062,12 @@ my_widget_default_mouse_single_click
                                left_or_right=0;
                                set_area(mw->gd,x+right_click_x-160,y+right_click_y+105,160,70);
                             }
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/3_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/3_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             right_click_flag=3;
                             my_widget_show(mw);
                             break;
                         case 4://属性
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_2_5.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_2_5.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             cur_file_index=cur_directory_index;
                             file_or_directory=0;
                             show_file_attribute(mw);
@@ -1081,7 +1081,7 @@ my_widget_default_mouse_single_click
                     switch((y1-right_click_y)/35)
                    {
                         case 0:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_1_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_1_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             if(right_click_x< (area.width-320))
                             {
                                left_or_right=1;
@@ -1092,17 +1092,17 @@ my_widget_default_mouse_single_click
                                left_or_right=0;
                                set_area(mw->gd,x+right_click_x-160,y+right_click_y,160,105);
                             }
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/4_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/4_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             right_click_flag=4;
                             my_widget_show(mw);
                             break;
                         case 1:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_1_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_1_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             set_area(mw->gd,area.x,area.y,area.width,area.height);
                             refresh(mw);
                             break;
                         case 2:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_1_3.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_1_3.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             set_area(mw->gd,area.x,area.y,area.width,area.height);
                             paste_file(mw,di_ptr);
                             if(cut_paste_flag==2)
@@ -1111,7 +1111,7 @@ my_widget_default_mouse_single_click
                             cut_paste_flag=0;
                             break;
                         case 3:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_1_4.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_1_4.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             if(right_click_x< (area.width-320))
                             {
                                left_or_right=1;
@@ -1122,12 +1122,12 @@ my_widget_default_mouse_single_click
                                left_or_right=0;
                                set_area(mw->gd,x+right_click_x-160,y+right_click_y+105,160,70);
                             }
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/3_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/3_0.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             right_click_flag=3;
                             my_widget_show(mw);
                             break;
                         case 4:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/1_1_5.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/1_1_5.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             cur_file_index=cur_directory_index;
                             file_or_directory=0;
                             show_file_attribute(mw);
@@ -1159,39 +1159,39 @@ my_widget_default_mouse_single_click
                     switch((y1-right_click_y)/35)
                    {
                         case 0:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_1_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_1_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                              set_area(mw->gd,area.x,area.y,area.width,area.height);
                             my_widget_repaint(mw);
                             my_widget_show(mw);
                             open_file(mw);
                             return 0;
                         case 1://剪切
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_1_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_1_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             cut_file(di_ptr);
                             break;
                         case 2://复制
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_1_3.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_1_3.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             copy_file(di_ptr);
                             break;
                         case 3: //删除
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_1_4.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_1_4.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             set_area(mw->gd,area.x,area.y,area.width,area.height);
                             delete_file(mw,di_ptr);
                             refresh(mw);
                             break;
                         case 4://重命名
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_1_5.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_1_5.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             save_or_rename_flag=2;
                             set_area(mw->gd,area.x,area.y,area.width,area.height);
                             rename_file(mw);
                             break;
                         case 5://压缩
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_1_6.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_1_6.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             compress_file(di_ptr);
                             refresh(mw);
                             break;
                         case 6://属性
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_1_7.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_1_7.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             file_or_directory=1;
                             show_file_attribute(mw);
                             break;
@@ -1204,39 +1204,39 @@ my_widget_default_mouse_single_click
                     switch((y1-right_click_y)/35)
                    {
                         case 0:
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_2_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_2_1.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             set_area(mw->gd,area.x,area.y,area.width,area.height);
                             my_widget_repaint(mw);
                             my_widget_show(mw);
                             open_file(mw);
                             ;
                         case 1://剪切
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_2_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_2_2.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             cut_file(di_ptr);
                             break;
                         case 2://复制
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_2_3.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_2_3.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             copy_file(di_ptr);
                             break;
                         case 3: //删除
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_2_4.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_2_4.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             set_area(mw->gd,area.x,area.y,area.width,area.height);
                             delete_file(mw,di_ptr);
                             refresh(mw);
                             break;
                         case 4://重命名
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_2_5.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_2_5.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             save_or_rename_flag=2;
                             set_area(mw->gd,area.x,area.y,area.width,area.height);
                             rename_file(mw);
                             break;
                         case 5://解压缩
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_2_6.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_2_6.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             uncompress_file(di_ptr);
                             refresh(mw);
                             break;
                         case 6://属性
-                            draw_img(mw->gd, "/home/wangfei/egui/resource/icons/right_click/2_2_7.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
+                            draw_img(mw->gd, "/home/yanglei/egui/resource/icons/right_click/2_2_7.bmp", ALIGN_HORIZONTAL_TYPE_CENTER | ALIGN_VERTICAL_TYPE_CENTER );
                             file_or_directory=1;
                             show_file_attribute(mw);
                             break;

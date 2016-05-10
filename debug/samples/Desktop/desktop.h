@@ -41,6 +41,10 @@ extern si_t screen_w;
 extern si_t screen_h;
 extern struct window_style desktop_default_style;
 
+///////////////////////////////////////////////////////
+extern struct image_view * bar_img[];
+
+
 /**
  * 将地址强制转换成 struct window *
  **/

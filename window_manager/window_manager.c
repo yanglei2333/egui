@@ -432,7 +432,7 @@ static si_t interface_init()
 	pid_t id;
 	id = fork();
 	if(id == 0){
-		execl("/home/wangfei/egui/_bulid/debug/samples/Desktop/Desktop","./Desktop",NULL);
+		execl("/home/yanglei/egui/_bulid/debug/samples/Desktop/Desktop","./Desktop",NULL);
 	}
 	
     return 0;

@@ -64,6 +64,8 @@ si_t screen_h = 0;
 si_t area_num_x=0;
 si_t area_num_y=0;
 
+struct image_view * bar_img[10];
+/*任务栏图片*/
 
 
 //找到但当前区域已有快捷方式，返回0；
@@ -152,7 +154,7 @@ si_t shortcut_act(struct shortcut* sh_ptr){
 
 
 int change_file(char* file,char* src,char* des){
-	char file2[]="/home/wangfei/egui/debug/samples/Desktop/shortcut/temp11";
+	char file2[]="/home/yanglei/egui/debug/samples/Desktop/shortcut/temp11";
     FILE *in=fopen(file,"r");
     FILE *out=fopen(file2,"w");  /*out是充当临时文件作用*/
     char buffer[1024];
@@ -427,6 +429,9 @@ void desktop_handler(addr_t arg, union message* msg)
 		{
 			bar_num--;
 			int i = desktop_info_find_window_num(desktop_info_ptr, window_descripter);
+			int j=i-1;
+			for(;j<bar_num-2;j++)
+				bar_img[j]=bar_img[j+1];
 			vector_erase(&(desktop_info_ptr->window_info_vector),i);
 			desktop_bar_repaint(global_application.main_window);
 		}
@@ -487,7 +492,7 @@ int main()
 
 
 	/* 画背景图片 */
-    Desktop_im = image_view_init("/home/wangfei/egui/resource/icons/desktop/desktop11.bmp");
+    Desktop_im = image_view_init("/home/yanglei/egui/resource/icons/desktop/desktop11.bmp");
     if(Desktop_im == NULL)
     {
         application_exit();
@@ -505,7 +510,7 @@ int main()
 	{
 		vector_init(&sh_desktop_vector);
 		DIR * dir_ptr;
-		char path[]="/home/wangfei/egui/debug/samples/Desktop/shortcut/";
+		char path[]="/home/yanglei/egui/debug/samples/Desktop/shortcut/";
 		char full_path[1024]={0};
 		struct dirent * dirent_ptr;
 		char content[1024];
@@ -605,11 +610,11 @@ int main()
 				//当前文件是真实的图片
 				else if(strstr(dirent_ptr->d_name,".bmp")!=NULL){
 					shortcut_set_text(sh,dirent_ptr->d_name);
-					shortcut_set_img_path(sh,"/home/wangfei/egui/resource/icons/file_icon/bmp_1.bmp");
-					shortcut_set_img_normal_path(sh,"/home/wangfei/egui/resource/icons/file_icon/bmp_1.bmp");
-					shortcut_set_img_select_path(sh,"/home/wangfei/egui/resource/icons/file_icon/bmp_2.bmp");
+					shortcut_set_img_path(sh,"/home/yanglei/egui/resource/icons/file_icon/bmp_1.bmp");
+					shortcut_set_img_normal_path(sh,"/home/yanglei/egui/resource/icons/file_icon/bmp_1.bmp");
+					shortcut_set_img_select_path(sh,"/home/yanglei/egui/resource/icons/file_icon/bmp_2.bmp");
 					strcpy(sh->app_name, "image_view");
-				    strcpy(sh->app_path, "/home/wangfei/egui/_bulid/debug/samples/");				
+				    strcpy(sh->app_path, "/home/yanglei/egui/_bulid/debug/samples/");				
 					//直到将该快捷方式分配好位置为止
 					while(1){
 						struct point p;
@@ -625,11 +630,11 @@ int main()
 				//当前文件是其他文本文件
 				else if(S_ISREG(file_info.st_mode)){
 					shortcut_set_text(sh,dirent_ptr->d_name);
-					shortcut_set_img_path(sh,"/home/wangfei/egui/resource/icons/file_icon2/txt_1.bmp");
-					shortcut_set_img_normal_path(sh,"/home/wangfei/egui/resource/icons/file_icon2/txt_1.bmp");
-					shortcut_set_img_select_path(sh,"/home/wangfei/egui/resource/icons/file_icon2/txt_2.bmp");
+					shortcut_set_img_path(sh,"/home/yanglei/egui/resource/icons/file_icon2/txt_1.bmp");
+					shortcut_set_img_normal_path(sh,"/home/yanglei/egui/resource/icons/file_icon2/txt_1.bmp");
+					shortcut_set_img_select_path(sh,"/home/yanglei/egui/resource/icons/file_icon2/txt_2.bmp");
 					strcpy(sh->app_name, "editerbasic");
-				    strcpy(sh->app_path, "/home/wangfei/egui/_bulid/debug/samples/");				
+				    strcpy(sh->app_path, "/home/yanglei/egui/_bulid/debug/samples/");				
 					//直到将该快捷方式分配好位置为止
 					while(1){
 						struct point p;
@@ -645,11 +650,11 @@ int main()
 				//当前是文件夹（目录）
 				else if(S_ISDIR(file_info.st_mode)){
 					shortcut_set_text(sh,dirent_ptr->d_name);
-					shortcut_set_img_path(sh,"/home/wangfei/egui/resource/icons/file_icon/dir1_1.bmp");
-					shortcut_set_img_normal_path(sh,"/home/wangfei/egui/resource/icons/file_icon/dir1_1.bmp");
-					shortcut_set_img_select_path(sh,"/home/wangfei/egui/resource/icons/file_icon/dir1_2.bmp");
+					shortcut_set_img_path(sh,"/home/yanglei/egui/resource/icons/file_icon/dir1_1.bmp");
+					shortcut_set_img_normal_path(sh,"/home/yanglei/egui/resource/icons/file_icon/dir1_1.bmp");
+					shortcut_set_img_select_path(sh,"/home/yanglei/egui/resource/icons/file_icon/dir1_2.bmp");
 					strcpy(sh->app_name, "file_browser");
-				    strcpy(sh->app_path, "/home/wangfei/egui/_bulid/debug/samples/file_browser/");				
+				    strcpy(sh->app_path, "/home/yanglei/egui/_bulid/debug/samples/file_browser/");				
 					//直到将该快捷方式分配好位置为止
 					while(1){
 						struct point p;
@@ -665,9 +670,9 @@ int main()
 				//当前文件是其他未知文件
 				else{
 					shortcut_set_text(sh,dirent_ptr->d_name);
-					shortcut_set_img_path(sh,"/home/wangfei/egui/resource/icons/file_icon2/ex_1.bmp");
-					shortcut_set_img_normal_path(sh,"/home/wangfei/egui/resource/icons/file_icon2/ex_1.bmp");
-					shortcut_set_img_select_path(sh,"/home/wangfei/egui/resource/icons/file_icon2/ex_2.bmp");
+					shortcut_set_img_path(sh,"/home/yanglei/egui/resource/icons/file_icon2/ex_1.bmp");
+					shortcut_set_img_normal_path(sh,"/home/yanglei/egui/resource/icons/file_icon2/ex_1.bmp");
+					shortcut_set_img_select_path(sh,"/home/yanglei/egui/resource/icons/file_icon2/ex_2.bmp");
 					strcpy(sh->app_name, "NULL");
 				    strcpy(sh->app_path, "NULL");				
 					//直到将该快捷方式分配好位置为止
